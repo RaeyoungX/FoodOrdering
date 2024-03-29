@@ -1,0 +1,52 @@
+/* HomeScreen.css  
+.product-screen {
+ 
+    background-image: url('../Project/bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+ custom.css 
+ */
+
+ /* custom.css */
+
+.product-card {
+  border: none; /* 移除边框 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 如果需要的话，添加阴影 */
+}
+
+/* 如果你的卡片中有其他地方需要移除边框，也可以一并添加样式 */
+.card, .card * {
+  border: none !important; /* 强制覆盖所有.card相关的边框样式 */
+}
+
+/* ProductScreen.css */
+
+.product-image-container {
+  position: relative;
+}
+
+.product-price {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.add-to-cart-icon {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 50px; /* 根据需要调整大小 */
+  height: auto; /* 保持图片比例 */
+  cursor: pointer;
+}
+
+.card-img-top {
+  width: 100%;
+  height: auto;
+}

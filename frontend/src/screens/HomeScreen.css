@@ -1,0 +1,42 @@
+/* HomeScreen.css */
+/* CSS样式 */
+.section-one {
+  height: 100vh; /* 视窗高度 */
+  background-image: url('../Project/homebg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+/* HomeScreen.css */
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* 防止图片移动时超出section区域 */
+}
+
+.section-two {
+  position: relative; /* 设置相对定位，使图片能够根据这个section定位 */
+}
+
+.image-up, .image-down {
+  position: absolute;
+  
+  top: 50%; /* 初始位置设置在中间 */
+  left: 50%;
+  transform: translate(-50%, -50%); /* 居中图片 */
+  transition: transform 4s ease; /* 平滑动画 */
+  transition-delay: 0.5s;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 保证图片不失真 */
+}
+
+.section-two.animate .image-up {
+  transform: translate(-50%, -70%); /* 向上移动，数字可调整以控制移动距离 */
+}
+
+.section-two.animate .image-down {
+  transform: translate(-50%, 5%); /* 向下移动，数字可调整以控制移动距离 */
+}

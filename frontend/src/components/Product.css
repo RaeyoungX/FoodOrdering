@@ -1,0 +1,18 @@
+/* Product.css */
+.no-border {
+  border: none !important;
+  box-shadow: none !important; /* 如果有阴影的话也去掉 */
+}
+ 
+.card-img {
+  mix-blend-mode: multiply; /* 这会使得图片的白色部分与背景混合 */
+}
+/* Product.css */
+.card {
+  background: none; /* 移除卡片默认背景 */
+  
+}
+
+.card-img-top {
+  border-radius: 0; /* 移除图片的圆角（如果有的话） */
+}
