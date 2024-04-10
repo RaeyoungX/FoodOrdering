@@ -5,7 +5,11 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserDetails } from '../actions/userActions'
 import { USER_UPDATE_PROFILE_RESET } from '../contents/userContents'
+import { useNavigate } from 'react-router-dom';  
 
+ 
+ 
+  
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -13,7 +17,7 @@ const ProfileScreen = ({ location, history }) => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate(); 
   const userDetails = useSelector((state) => state.userDetails)
   const { loading, error, user } = userDetails
 
@@ -24,7 +28,7 @@ const ProfileScreen = ({ location, history }) => {
   const { success } = userUpdateProfile 
   useEffect(() => {
     if (!userInfo) {
-      history.push('/login')
+      navigate('/login')
     } else {
       if (!user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET })

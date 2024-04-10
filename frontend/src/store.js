@@ -3,21 +3,43 @@ import { thunk } from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { useMemo } from "react";
 import {
-  productListReducer,  
-  productDeatilsReducer,
+  productListReducer, 
+  productDeatilsReducer, 
+  productDeleteReducer,
+  productCreateReducer,
+  productUpdateReducer
 } from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducers'
-import { userLoginReducer, userRegisterReducer , userDetailsReducer, userUpdateProfileReducer} from './reducers/userReducers'
-import { orderCreateReducer,orderDetailsReducer} from './reducers/orderReducers'
+import { userLoginReducer,
+   userRegisterReducer , 
+   userDetailsReducer,
+   userUpdateProfileReducer,
+   userListReducer,
+   userUpdateReducer,
+   userDeleteReducer,} from './reducers/userReducers'
+import { orderCreateReducer,
+  orderDetailsReducer,
+  orderListReducer
+} from './reducers/orderReducers'
 const reducer = combineReducers({
   productList: productListReducer,
+  productDelete: productDeleteReducer,
+  productCreate: productCreateReducer,
+  productDetails: productDeatilsReducer,
+  productUpdate: productUpdateReducer,
   cart: cartReducer,
   userLogin: userLoginReducer,
+  userUpdate: userUpdateReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
+  orderList: orderListReducer,
+ 
+  
 })
 const cartItemsFromStorage = localStorage.getItem('cartItems')
   ? JSON.parse(localStorage.getItem('cartItems'))

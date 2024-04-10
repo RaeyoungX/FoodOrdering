@@ -29,13 +29,12 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new Error('无效的用户信息')
   }
 })
-
 //@desc    用户身份验证 & 获取Token
 //@route   POST/api/users/login
 //@access  公开
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
- 
+
   const user = await User.findOne({ email })
 
   if (user && (await user.matchPassword(password))) {
@@ -70,6 +69,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
     throw new Error('用户不存在')
   }
 })
+
 //@desc    更新用户个人资料
 //@route   PUT/api/users/profile
 //@access  私密
@@ -97,4 +97,71 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error('用户不存在')
   }
 })
-export { registerUser, authUser, getUserProfile, updateUserProfile }
+
+//@desc    获取所有注册用户
+//@route   GET/api/users
+//@access  私密(仅限管理员)
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
+})
+
+//@desc    删除注册用户
+//@route   DELETE/api/users/:id
+//@access  私密(仅限管理员)
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+  if (user) {
+    await User.deleteOne({ _id: req.params.id });
+    res.json({ message: '用户已删除' })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+//@desc    获取单个用户信息
+//@route   GET/api/users/:id
+//@access  私密(仅限管理员)
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password')
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
+//@desc    更新单个用户信息
+//@route   PUT/api/users/:id
+//@access  私密(仅限管理员)
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+  //获取更新后的资料
+  if (user) {
+    user.name = req.body.name || user.name
+    user.email = req.body.email || user.email
+    user.isAdmin = req.body.isAdmin || user.isAdmin
+    const updateUser = await user.save()
+    //返回更新后的用户信息
+    res.json({
+      _id: updateUser._id,
+      name: updateUser.name,
+      email: updateUser.email,
+      isAdmin: updateUser.isAdmin,
+    })
+  } else {
+    res.status(404)
+    throw new Error('用户不存在')
+  }
+})
+export {
+  registerUser,
+  authUser,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  deleteUser,
+  getUserById,
+  updateUser,
+}

@@ -22,4 +22,68 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 })
 
-export { getProducts, getProductById }
+//@desc    删除单个产品
+//@route   DELETE/api/products/:id
+//@access  私密（仅限管理员）
+const deleteProduct = asyncHandler(async (req, res) => {
+  const product = await Product.findByIdAndDelete(req.params.id);
+  if (product) {
+    res.json({ message: '产品删除成功' });
+  } else {
+    res.status(404);
+    throw new Error('查询不到产品');
+  }
+});
+
+//@desc    创建产品
+//@route   POST/api/products
+//@access  私密（仅限管理员）
+const createProduct = asyncHandler(async (req, res) => {
+  //创建一个产品模版
+  const product = new Product({
+    name: '样品名称',
+    price: 0,
+    user: req.user._id,
+    category: '样品分类',
+    image: '/images/sample.jpg',
+    stock: 0,
+    rating: 0,
+  })
+  const createdProduct = await product.save()
+  res.status(201).json(createdProduct)
+})
+
+//@desc    更新产品内容
+//@route   PUT/api/products/:id
+//@access  私密（仅限管理员）
+const updateProduct = asyncHandler(async (req, res) => {
+  const {
+    name,
+    price,
+    image,
+    category,
+    stock,
+  } = req.body
+
+  const product = await Product.findById(req.params.id)
+  if (product) {
+    product.name = name
+    product.price = price
+    product.image = image
+    product.category = category
+    product.stock = stock
+    const updatedProduct = await product.save()
+    res.status(201).json(updatedProduct)
+  } else {
+    res.status(404)
+    throw new Error('查询不到产品')
+  }
+})
+
+export {
+  getProducts,
+  getProductById,
+  deleteProduct,
+  createProduct,
+  updateProduct,
+}

@@ -12,8 +12,12 @@ import ShippingScreen from './screens/ShippingScreen'
 import PaymentScreen from './screens/PaymentScreen'
 import PlaceorderScreen from './screens/PlaceorderScreen'
 import OrderScreen from './screens/OrderScreen'
+import UserListScreen from './screens/UserListScreen'
+import UserEditScreen from './screens/UserEditScreen'
+import ProductListScreen from './screens/ProductListScreen'
+import ProductEditScreen from './screens/ProductEditScreen'
+import OrderListScreen from './screens/OrderListScreen'
 
- 
 import './index.css';
 
 function App() {
@@ -23,6 +27,7 @@ function App() {
       <main  className='py-3'>
         <Container>
           <Routes>  
+           
             <Route path='/register' element={<RegisterScreen />} />
             <Route path='/payment' element={<PaymentScreen />} />
             <Route path='/order/:id' element={<OrderScreen />} />
@@ -32,7 +37,12 @@ function App() {
             <Route path='/login' element={<LoginScreen /> } />
             <Route path='/product' element={<ProductScreen />} />
             <Route path='/cart' element={<CartScreen />} />
+            <Route path='/admin/userlist' element={<UserListScreen />} />
+            <Route path='/admin/user/:id/edit' element={<UserEditScreen />} />
+            <Route path='/admin/productlist' element={<ProductListScreen />} />
+            <Route path='/admin/product/:id/edit' element={< ProductEditScreen />} />
             <Route path='/' element={<HomeScreen />} exact />
+            <Route path='/admin/orderlist' element={< OrderListScreen/>} />
           </Routes>
         </Container>
       </main>

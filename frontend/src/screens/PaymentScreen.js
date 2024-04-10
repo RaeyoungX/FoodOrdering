@@ -40,13 +40,12 @@ const PaymentScreen = ({ history }) => {
             ></Form.Check>
             { <Form.Check
               type='radio'
-              label='支付宝'
-              id='支付宝'
-              name='paymentMethod'
-              value='支付宝'
-              checked
+              label='PayPal'
+              id='PayPal'
+              name='paymenMethod'
+              value='PayPal'
               onChange={(e) => setPaymentMethod(e.target.value)}
-            ></Form.Check> }
+            ></Form.Check>}
           </Col>
         </Form.Group>
         <Button type='submit' variant='primary'>
